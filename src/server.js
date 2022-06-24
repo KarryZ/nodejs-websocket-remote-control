@@ -20,7 +20,10 @@ export const startWebsocket = () => {
                 });
         });       
                 
-        process.on('SIGINT', () =>  server.close() )
+        process.on('SIGINT', () =>  {
+                server.close();
+                console.log('WebSocketServer is stopped');
+        })
 };
 
 startWebsocket();
