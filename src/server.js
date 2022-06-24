@@ -10,7 +10,7 @@ export const startWebsocket = () => {
         const server = new WebSocketServer({ port: +PORT });
         
         server.on('connection', (ws, req) => {
-                //console.log(req.rawHeaders);
+                console.log(req.rawHeaders);
                 ws.on('message', (data) => {
                 const command = commandWithParams(data.toString());
                 console.log(`${command}`);
