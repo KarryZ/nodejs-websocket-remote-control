@@ -1,4 +1,4 @@
-import WebSocket, { WebSocketServer } from 'ws';
+import { WebSocketServer, createWebSocketStream  } from 'ws';
 import 'dotenv/config';
 import { commandWithParams, switchCommands } from './controller/comandsController.js';
 
@@ -11,11 +11,12 @@ export const startWebsocket = () => {
         
         server.on('connection', (ws, req) => {
                 console.log(req.rawHeaders);
-                ws.on('message', (data) => {
-                const command = commandWithParams(data.toString());
-                console.log(`${command}`);
-                let commandResult = switchCommands();
-                ws.send(`${commandResult}`)
+                const duplex = createWebSocketStream(ws, { encoding: 'utf8', decodeStrings: false });
+                duplex.on('data', (data) => {
+                        const command = commandWithParams(data.toString());
+                        console.log(`${command}`);
+                        let commandResult = switchCommands();
+                        duplex.write(`${commandResult}`)
                 });
         });       
                 
