@@ -29,6 +29,6 @@ For running this project locally in your system, please go through steps below:
     
     npm install
 
-    npm run dev
+    npm run start:dev
 ```
 
