@@ -9,14 +9,15 @@ export const startWebsocket = () => {
 
         const server = new WebSocketServer({ port: +PORT });
         
-        server.on('connection', (ws, req) => {
+        server.on('connection',  (ws, req) => {
                 console.log(req.rawHeaders);
                 const duplex = createWebSocketStream(ws, { encoding: 'utf8', decodeStrings: false });
-                duplex.on('data', (data) => {
+                duplex.on('data', async (data) => {
                         const command = commandWithParams(data.toString());
                         console.log(`${command}`);
-                        let commandResult = switchCommands();
-                        duplex.write(`${commandResult}`)
+                        let commandResult = await switchCommands();
+                        console.log(`commandResult ${commandResult}`);
+                        duplex.write(`${commandResult}`);
                 });
         });       
                 

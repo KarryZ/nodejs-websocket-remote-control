@@ -1,10 +1,11 @@
-import robot from 'robotjs';
 import { getCurrentPositions } from './currentPosition.js';
 import { drawSquare, drawCircle, drawRectangle } from './drawFigures.js';
+import { printScreen } from './printScreen.js';
 import { putMouseDown } from './putMouseDown.js';
 import { putMouseLeft } from './putMouseLeft.js';
 import { putMouseRight } from './putMouseRight.js';
 import { putMouseUp } from './putMouseUp.js';
+
 
 
 
@@ -15,10 +16,10 @@ export const commandWithParams = (data) => {
     firstParam = +firstParam;
     secondParam = +secondParam;
     console.log(`command firstParam ${command} ${firstParam}`);
-    return secondParam ? `${command} ${firstParam},${secondParam}` : `${command} ${firstParam}`; 
+    return secondParam ? `${command} ${firstParam},${secondParam}` : firstParam ? `${command} ${firstParam}` :  `${command}`; 
 }
 
-export const switchCommands =  () => {
+export const switchCommands = async () => {
     switch (command) {
         case "mouse_position":
             return getCurrentPositions();
@@ -43,6 +44,10 @@ export const switchCommands =  () => {
         break; 
         case "draw_rectangle":
             return drawRectangle(firstParam, secondParam);
+        break;
+        case "prnt_scrn":
+            const image = await printScreen();
+            return image;
         break;
         default:
             break;
