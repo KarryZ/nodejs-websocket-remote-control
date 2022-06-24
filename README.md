@@ -11,7 +11,7 @@ For running this project locally in your system, please go through steps below:
    
     cd remote-control
     
-    npm run install
+    npm install
 
     npm run start:dev - for development mode
 
@@ -27,7 +27,7 @@ For running this project locally in your system, please go through steps below:
    
     cd nodejs-websocket-remote-control
     
-    npm run install
+    npm install
 
     npm run dev
 ```
