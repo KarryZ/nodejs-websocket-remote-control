@@ -5,8 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start:dev": "nodemon src/server.ts",
-    "dev": "node src/server.js",
+    "start:dev": "node src/server.js",
     "start:prod": "npm run tsc && node public/server.js"
   },
   "repository": {
